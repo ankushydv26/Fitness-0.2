@@ -1,0 +1,16 @@
+{
+    "scripts": {
+      "frontend": "npm run dev --prefix ./frontend/",
+      "backend": "npm run develop --prefix ./backend/",
+      "clear": "cd frontend && rm -rf .next && rm -rf cache",
+      "setup:frontend": "cd frontend && npm install",
+      "setup:backend": "cd backend && npm install",
+      "setup": "npm install && npm setup:frontend && npm setup:backend",
+      "dev": "npm run clear && concurrently \"cd frontend && npm run dev\" \"cd backend && npm run develop\""
+    },
+    "dependencies": {
+      "concurrently": "^8.2.2"
+    },
+    "packageManager": "npm@10.3.0"
+  }
+  
