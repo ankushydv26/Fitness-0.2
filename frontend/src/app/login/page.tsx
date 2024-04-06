@@ -1,15 +1,15 @@
 "use client"
-import {useState} from "react"
+import { useFormState } from "react-dom";
+import { loginAction } from "../lib/login-action";
+
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-  
-    const handleLogin = () => {
-      // Handle login logic here
-      console.log('Email:', email);
-      console.log('Password:', password);
-    };
+    const initialState ={}
+
+    const x =  process.env.STRAPI_URL
+    console.log(x , "x")
+    
+    const [ state, dispatch] = useFormState(loginAction , initialState);
   
     return (
       <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -19,7 +19,7 @@ const LoginPage = () => {
               Sign in to your account
             </h2>
           </div>
-          {/* <form className="mt-8 space-y-8" onSubmit={handleLogin}> */}
+          <form className="mt-8 space-y-8" action={dispatch}>
             <input type="hidden" name="remember" value="true" />
             <div className="rounded-md shadow-sm ">
               <div>
@@ -27,15 +27,15 @@ const LoginPage = () => {
                   Email address
                 </label>
                 <input
-                  id="email-address"
+                  id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                //   value={email}
+                //   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div>
@@ -50,8 +50,8 @@ const LoginPage = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                //   value={password}
+                //   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -78,13 +78,13 @@ const LoginPage = () => {
   
             <div>
               <button
-                onClick={handleLogin}
+                // onClick={handleLogin}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Sign in
               </button>
             </div>
-          {/* </form> */}
+          </form>
         </div>
       </div>
     );
